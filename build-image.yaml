@@ -10,7 +10,7 @@
     # login to gitlab container registry
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
     # generate digest of the dockerfile
-    - export DOCKERFILE_DIGEST=$(sha256sum Dockerfile | cut -f 1 -d ' ')
+    - export DOCKERFILE_DIGEST=$(sha256sum ${BUILD_IMAGE_CONTEXT}/Dockerfile | cut -f 1 -d ' ')
     - export BUILD_IMAGE_NOT_EXIST=$(docker manifest inspect ${BUILD_IMAGE_NAME}:${DOCKERFILE_DIGEST} > /dev/null; echo $?)
     - echo ${BUILD_IMAGE_NOT_EXIST}
     - echo "DOCKERFILE_DIGEST=${DOCKERFILE_DIGEST}" >> out.env
