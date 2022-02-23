@@ -1,10 +1,9 @@
 # This job will push image to the gitlab repo container registry
 .build-image:
-  image: ourskyci/dind
+  image: ourskyci/docker-cli
   services:
-    - docker:dind
+    - ourskyci/docker:dind
   variables:
-    DOCKER_TLS_CERTDIR: ""
     BUILD_IMAGE_CONTEXT: .
     BUILD_IMAGE_NAME: ${CI_REGISTRY_IMAGE}
   script:
